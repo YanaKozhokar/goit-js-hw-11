@@ -1,8 +1,8 @@
 import Notiflix from 'notiflix';
 
 const searchFormHandler = document.querySelector('#search-form');
-const inputRef = document.querySelector('input[name="searchQuery"]');
-const galleryRef = document.querySelector('#gallery');
+const inputRef = document.querySelector('.search-input');
+const galleryRef = document.querySelector('.gallery');
 
 searchFormHandler.addEventListener('submit', createGallery);
 
@@ -24,8 +24,9 @@ async function fetchImages(input) {
 function createMarkup(images) {
   const markup = images.hits
     .map(image => {
-      return `<div class="photo-card">
-        <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
+      return `<li class="gallery-item">
+      <div class="photo-card">
+        <img class="gallery-image" src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
         <div class="info">
           <p class="info-item">
             <b>Likes</b> ${image.likes}
@@ -40,7 +41,8 @@ function createMarkup(images) {
             <b>Downloads</b> ${image.downloads}
           </p>
         </div>
-      </div>`;
+      </div>
+    </li>`;
     })
     .join('');
   galleryRef.insertAdjacentHTML('beforeend', markup);
