@@ -24,3 +24,15 @@
   height: 300px;
   object-fit: cover;
 }
+
+.load-more {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border-color: transparent;
+  color: #ffffff;
+  fill: #ffffff;
+  background: #3f56b1;
+  cursor: pointer;
+}
