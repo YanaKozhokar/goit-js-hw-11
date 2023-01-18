@@ -22,9 +22,14 @@ async function fetchImages(input) {
 }
 
 function createMarkup(images) {
-  const markup = images.hits
-    .map(image => {
-      return `<li class="gallery-item">
+  if (images.hits.length === 0) {
+    Notiflix.Notify.failure(
+      'Sorry, there are no images matching your search query. Please try again.'
+    );
+  } else {
+    const markup = images.hits
+      .map(image => {
+        return `<li class="gallery-item">
       <div class="photo-card">
         <img class="gallery-image" src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
         <div class="info">
@@ -43,7 +48,8 @@ function createMarkup(images) {
         </div>
       </div>
     </li>`;
-    })
-    .join('');
-  galleryRef.insertAdjacentHTML('beforeend', markup);
+      })
+      .join('');
+    galleryRef.insertAdjacentHTML('beforeend', markup);
+  }
 }
