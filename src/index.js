@@ -16,6 +16,7 @@ let totalPages = 0;
 function createGallery(event) {
   event.preventDefault();
   keyValue = inputRef.value;
+  page = 1;
   galleryRef.innerHTML = '';
   if (keyValue.trim() === '') {
     Notiflix.Notify.info('Oops! Please, enter smth to search.');
