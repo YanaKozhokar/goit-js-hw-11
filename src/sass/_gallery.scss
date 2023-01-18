@@ -1,5 +1,3 @@
-@import '~node_modules/modern-normalize/modern-normalize.css';
-
 .gallery-list {
   display: flex;
   flex-wrap: wrap;
@@ -35,4 +33,8 @@
   fill: #ffffff;
   background: #3f56b1;
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
