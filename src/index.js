@@ -6,6 +6,8 @@ const galleryRef = document.querySelector('.gallery');
 
 searchFormHandler.addEventListener('submit', createGallery);
 
+let page = 1;
+
 function createGallery(event) {
   event.preventDefault();
   galleryRef.innerHTML = '';
@@ -17,8 +19,10 @@ function createGallery(event) {
 
 async function fetchImages(input) {
   return await fetch(
-    `https://pixabay.com/api/?key=32921127-0509bb2923ebc5e2476cd7059&q=$${input}&image_type=photo&orientation=horizontal&safesearch=true&fields=webformatURL,largeImageURL,tags,likes,views,comments,downloads`
-  ).then(response => response.json());
+    `https://pixabay.com/api/?key=32921127-0509bb2923ebc5e2476cd7059&q=$${input}&image_type=photo&orientation=horizontal&safesearch=true&fields=webformatURL,largeImageURL,tags,likes,views,comments,downloads&page=${page}`
+  )
+    .then(response => response.json())
+    .then((page += 1));
 }
 
 function createMarkup(images) {
