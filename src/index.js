@@ -29,7 +29,7 @@ function createGallery(event) {
 async function fetchImages(input) {
   try {
     const response = await axios.get(
-      `https://pixabay.com/api/?key=32921127-0509bb2923ebc5e2476cd7059&q=$${input}&image_type=photo&orientation=horizontal&safesearch=true&fields=webformatURL,largeImageURL,tags,likes,views,comments,downloads&page=${page}`
+      `https://pixabay.com/api/?key=32921127-0509bb2923ebc5e2476cd7059&q=$${input}&image_type=photo&orientation=horizontal&safesearch=true&fields=webformatURL,largeImageURL,tags,likes,views,comments,downloads&page=${page}&per_page=40`
     );
     if (response.data.hits.length === 0) {
       Notiflix.Notify.failure(
