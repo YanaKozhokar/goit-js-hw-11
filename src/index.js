@@ -5,7 +5,6 @@ const searchFormHandler = document.querySelector('#search-form');
 const inputRef = document.querySelector('.search-input');
 const galleryRef = document.querySelector('.gallery-list');
 const buttonMoreEl = document.querySelector('.load-more');
-const alertEl = document.querySelector('.text');
 
 searchFormHandler.addEventListener('submit', createGallery);
 buttonMoreEl.addEventListener('click', onButtonClick);
@@ -18,13 +17,12 @@ function createGallery(event) {
   event.preventDefault();
   keyValue = inputRef.value;
   galleryRef.innerHTML = '';
-  alertEl.classList.add('hidden');
   if (keyValue.trim() === '') {
     Notiflix.Notify.info('Oops! Please, enter smth to search.');
     buttonMoreEl.classList.add('hidden');
     return;
   }
-  fetchImages(keyValue);
+  fetchImages(keyValue.replaceAll(' ', '+'));
   event.currentTarget.reset();
 }
 
@@ -38,7 +36,6 @@ async function fetchImages(input) {
         'Sorry, there are no images matching your search query. Please try again.'
       );
       buttonMoreEl.classList.add('hidden');
-      alertEl.classList.add('hidden');
       return;
     }
     if (page === 1) {
@@ -51,8 +48,10 @@ async function fetchImages(input) {
     createMarkup(response.data.hits);
     page += 1;
     if (page > totalPages) {
-      alertEl.classList.remove('hidden');
       buttonMoreEl.classList.add('hidden');
+      Notiflix.Notify.info(
+        "We're sorry, but you've reached the end of search results."
+      );
     }
   } catch (error) {
     console.error(error);
